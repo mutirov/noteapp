@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "11262065114",
+    "project_id": "flutterkitaphana",
+    "storage_bucket": "flutterkitaphana.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11262065114:android:8bd2807f37cc259bcc68e3",
+        "android_client_info": {
+          "package_name": "com.example.kitaphana"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcxufG3GR10E97J6OLmopiDPMgCpHHwCo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11262065114:android:d887e224af152b39cc68e3",
+        "android_client_info": {
+          "package_name": "com.example.notes_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcxufG3GR10E97J6OLmopiDPMgCpHHwCo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

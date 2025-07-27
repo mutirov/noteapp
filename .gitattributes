@@ -1,0 +1,12 @@
+# Dart dosyalarını öncelikle Dart olarak algılat 
+*.dart linguist-language=Dart 
+
+# Android ve iOS yapı dosyalarını sayımdan çıkart (vendored yap) 
+android/** linguist-vendored 
+ios/** linguist-vendored 
+
+# Diğer platform dosyalarını da benzer şekilde çıkarabilirsin 
+linux/** linguist-vendored 
+macos/** linguist-vendored 
+windows/** linguist-vendored 
+web/** linguist-vendored 
