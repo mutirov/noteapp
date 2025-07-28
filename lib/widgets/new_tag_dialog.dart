@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/tools/constants.dart';
 import 'package:notes_app/widgets/note_button.dart';
+import 'package:notes_app/widgets/note_form_field.dart';
 
 class NewTagDialog extends StatefulWidget {
   const NewTagDialog({super.key, this.tag});
-    final String? tag;
+  final String? tag;
 
   @override
   State<NewTagDialog> createState() => _NewTagDialogState();
@@ -39,48 +39,37 @@ class _NewTagDialogState extends State<NewTagDialog> {
           textAlign: TextAlign.left,
         ),
         SizedBox(height: 8),
-        TextFormField(
-          autofocus: true,
-          validator: (value){
-            if(value!.trim().isEmpty){
+        NoteFormField(
+          validator: (value) {
+            if (value!.trim().isEmpty) {
               return 'Please enter a tag name';
-            }else if(value.trim().length > 16){
+            } else if (value.trim().length > 16) {
               return 'Tag name should not exceed 16 characters';
             }
             return null;
           },
-          key: _tagKey,
           onChanged: (newValue) {
             _tagKey.currentState?.validate();
           },
+          key: _tagKey,
+          hintText: 'Enter tag name',
           controller: _tagController,
-          decoration: InputDecoration(
-            hintText: 'Enter tag name',
-            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-            isDense: true,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.0),
-              borderSide: BorderSide(color: primary),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.0),
-              borderSide: BorderSide(color: primary),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.0),
-              borderSide: BorderSide(color: Colors.red),
-            ),
-          ),
+          autofocus: true,
         ),
         SizedBox(height: 16),
         SizedBox(
           width: double.infinity,
-          child: NoteButton(label: 'Add', onPressed: () {
+          child: NoteButton(
+            label: 'Add',
+            onPressed: () {
               if (_tagKey.currentState!.validate()) {
                 Navigator.pop(context, _tagController.text.trim());
               }
-            },),
+            },
           ),
-       ] );
+        ),
+      ],
+    );
   }
 }
+

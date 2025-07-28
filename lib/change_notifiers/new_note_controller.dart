@@ -4,6 +4,7 @@ import 'package:notes_app/models/note.dart';
 import 'package:provider/provider.dart';
 import 'package:collection/collection.dart';
 
+
 class NewNoteController extends ChangeNotifier {
   Note? _note;
   set note(Note? value) {
