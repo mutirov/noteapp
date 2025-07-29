@@ -102,7 +102,7 @@ class NoteCard extends StatelessWidget {
                 GestureDetector(
                   onTap: () async {
                     final shouldDelete =
-                        await showConfirmatinDialog(context: context) ?? false;
+                        await showConfirmationDialog(context: context, title: 'Do you want to delete this note?') ?? false;
                     if (shouldDelete && context.mounted) {
                       context.read<NotesProvider>().deleteNote(
                         // Provider.of<NewNoteController>(context, listen: false)

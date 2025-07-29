@@ -17,7 +17,7 @@ class _ViewOptionsState extends State<ViewOptions> {
   @override
   Widget build(BuildContext context) {
     return Consumer<NotesProvider>(
-      builder: (_, notesProvider, __) => Padding(
+      builder: (_, notesProvider, _) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: [

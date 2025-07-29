@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/widgets/dialog_card.dart';
 import 'package:notes_app/widgets/note_button.dart';
 import 'package:notes_app/widgets/note_form_field.dart';
 
@@ -30,45 +31,47 @@ class _NewTagDialogState extends State<NewTagDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          'Add a tag',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-          textAlign: TextAlign.left,
-        ),
-        SizedBox(height: 8),
-        NoteFormField(
-          validator: (value) {
-            if (value!.trim().isEmpty) {
-              return 'Please enter a tag name';
-            } else if (value.trim().length > 16) {
-              return 'Tag name should not exceed 16 characters';
-            }
-            return null;
-          },
-          onChanged: (newValue) {
-            _tagKey.currentState?.validate();
-          },
-          key: _tagKey,
-          hintText: 'Enter tag name',
-          controller: _tagController,
-          autofocus: true,
-        ),
-        SizedBox(height: 16),
-        SizedBox(
-          width: double.infinity,
-          child: NoteButton(
-            label: 'Add',
-            onPressed: () {
-              if (_tagKey.currentState!.validate()) {
-                Navigator.pop(context, _tagController.text.trim());
-              }
-            },
+    return DialogCard(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Add a tag',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            textAlign: TextAlign.left,
           ),
-        ),
-      ],
+          SizedBox(height: 8),
+          NoteFormField(
+            validator: (value) {
+              if (value!.trim().isEmpty) {
+                return 'Please enter a tag name';
+              } else if (value.trim().length > 16) {
+                return 'Tag name should not exceed 16 characters';
+              }
+              return null;
+            },
+            onChanged: (newValue) {
+              _tagKey.currentState?.validate();
+            },
+            key: _tagKey,
+            hintText: 'Enter tag name',
+            controller: _tagController,
+            autofocus: true,
+          ),
+          SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            child: NoteButton(
+              child: Text('Add'),
+              onPressed: () {
+                if (_tagKey.currentState!.validate()) {
+                  Navigator.pop(context, _tagController.text.trim());
+                }
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

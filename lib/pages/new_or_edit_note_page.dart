@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notes_app/change_notifiers/new_note_controller.dart';
 import 'package:notes_app/tools/constants.dart';
 import 'package:notes_app/tools/dialogs.dart';
+import 'package:notes_app/widgets/note_back_button.dart';
 import 'package:notes_app/widgets/note_icon_button_outlined.dart';
 import 'package:notes_app/widgets/note_metadata.dart';
 import 'package:provider/provider.dart';
@@ -85,7 +86,7 @@ class _NewOrEditNotePageState extends State<NewOrEditNotePage> {
           Navigator.pop(context);
           return;
         }
-        final bool? shouldSave = await showConfirmatinDialog(context: context);
+        final bool? shouldSave = await showConfirmationDialog(context: context, title: 'Do you want to save the note?');
         if (shouldSave == null) return;
         if (!context.mounted) return;
         if (shouldSave) {
@@ -96,16 +97,7 @@ class _NewOrEditNotePageState extends State<NewOrEditNotePage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text((widget.isNewNote ?? true) ? 'New Note' : 'Edit Note'),
-          leading: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: NoteIconButtonOutlined(
-              icon: FontAwesomeIcons.chevronLeft,
-              onPressed: () {
-                //maybePop, geri gidilecek bir sayfa varsa geri gider, yoksa hiçbir şey yapmaz.
-                Navigator.maybePop(context);
-              },
-            ),
-          ),
+          leading: NoteBackButton(),
           actions: [
             Selector<NewNoteController, bool>(
               selector: (context, newNoteController) =>
@@ -196,3 +188,4 @@ class _NewOrEditNotePageState extends State<NewOrEditNotePage> {
     );
   }
 }
+

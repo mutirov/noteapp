@@ -1,12 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:notes_app/change_notifiers/registration_controller.dart';
+import 'package:notes_app/pages/recover_password_page.dart';
 import 'package:notes_app/tools/constants.dart';
 import 'package:notes_app/tools/validator.dart';
 import 'package:notes_app/widgets/note_button.dart';
 import 'package:notes_app/widgets/note_form_field.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:notes_app/widgets/note_icon_button.dart';
 import 'package:notes_app/widgets/note_icon_button_outlined.dart';
 import 'package:provider/provider.dart';
 
@@ -83,6 +83,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           filled: true,
                           textInputAction: TextInputAction.next,
                           validator: Validator.nameValidator,
+                          onChanged: (newValue) {
+                            _registrationController.fullName = newValue;
+                          },
                         ),
                         SizedBox(height: 12),
                       ],
@@ -94,6 +97,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         fillColor: white,
                         filled: true,
                         validator: Validator.emailValidator,
+                        onChanged: (newValue) {
+                          _registrationController.email = newValue;
+                        },
                       ),
                       SizedBox(height: 12),
                       Selector<RegistrationController, bool>(
@@ -117,31 +123,52 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             ),
                           ),
                           validator: Validator.passwordValidator,
+                          onChanged: (newValue) {
+                            _registrationController.password = newValue;
+                          },
                         ),
                       ),
                       SizedBox(height: 12),
                       if (!isRegisterMode) ...[
-                        Text(
-                          'Forgot password?',
-                          style: TextStyle(
-                            color: primary,
-                            fontWeight: FontWeight.bold,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const RecoverPasswordPage()));
+                          },
+                          child: Text(
+                            'Forgot password?',
+                            style: TextStyle(
+                              color: primary,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         SizedBox(height: 24),
                       ],
                       SizedBox(
                         height: 48,
-                        child: NoteButton(
-                          label: isRegisterMode
-                              ? 'Create my accaunt'
-                              : 'Sign in',
-                          onPressed: () {
-                            _formkey.currentState
-                                ?.validate(); // ?. Null değilse çalıştır, null ise geç.
-                            //Eğer _formKey.currentState null değilse, validate() fonksiyonunu çağır.
-                            //Eğer null ise, hiçbir şey yapma (çökme!).
-                          },
+                        child: Selector<RegistrationController, bool>(
+                          selector: (_, controller) => controller.isLoading,
+                          builder: (_, isLoading, _) => NoteButton(
+                            onPressed: isLoading ? null : () {
+                              // if left side is null, we are not going to move forward to the registration 
+                              if (_formkey.currentState?.validate() ?? false) {
+                                _registrationController.authenticateWithEmailAndPassword(context: context);
+                              }
+                              // ?. Null değilse çalıştır, null ise geç.
+                              //Eğer _formKey.currentState null değilse, validate() fonksiyonunu çağır.
+                              //Eğer null ise, hiçbir şey yapma (çökme!).
+                            },
+                            child: isLoading
+                                ? SizedBox(
+                                    height: 24,
+                                    width: 24,
+                                    child: CircularProgressIndicator(color: white,))
+                                : Text(
+                                    isRegisterMode
+                                        ? 'Create my accaunt'
+                                        : 'Sign in',
+                                  ),
+                          ),
                         ),
                       ),
                       SizedBox(height: 32),

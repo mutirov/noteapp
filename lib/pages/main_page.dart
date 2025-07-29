@@ -4,6 +4,8 @@ import 'package:notes_app/change_notifiers/new_note_controller.dart';
 import 'package:notes_app/change_notifiers/notes_provider.dart';
 import 'package:notes_app/models/note.dart';
 import 'package:notes_app/pages/new_or_edit_note_page.dart';
+import 'package:notes_app/services/auth_service.dart';
+import 'package:notes_app/tools/dialogs.dart';
 import 'package:notes_app/widgets/no_notes.dart';
 import 'package:notes_app/widgets/note_fab.dart';
 import 'package:notes_app/widgets/note_grid.dart';
@@ -29,7 +31,15 @@ class _MainPageState extends State<MainPage> {
         actions: [
           NoteIconButtonOutlined(
             icon: FontAwesomeIcons.rightFromBracket,
-            onPressed: () {},
+            onPressed: () async {
+              final bool shouldLogout =
+                  await showConfirmationDialog(
+                    context: context,
+                    title: 'Do you want to log out?',
+                  ) ??
+                  false;
+              if (shouldLogout) AuthService.logout();
+            },
           ),
         ],
       ),
@@ -49,30 +59,34 @@ class _MainPageState extends State<MainPage> {
       body: Consumer<NotesProvider>(
         builder: (context, notesProvider, child) {
           final List<Note> notes = notesProvider.notes;
-          return notes.isEmpty  && notesProvider.searchNotes.isEmpty
+          return notes.isEmpty && notesProvider.searchNotes.isEmpty
               ? const NoNotes()
               : Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
                       SearchField(),
-                      if(notes.isNotEmpty) ...[
-                      ViewOptions(),
-                      Expanded(
-                        child: notesProvider.isGrid
-                            ? NotesGrid(notes: notes)
-                            : NotesList(notes: notes),
-                      ),]else 
+                      if (notes.isNotEmpty) ...[
+                        ViewOptions(),
+                        Expanded(
+                          child: notesProvider.isGrid
+                              ? NotesGrid(notes: notes)
+                              : NotesList(notes: notes),
+                        ),
+                      ] else
                         Expanded(
                           child: Center(
-                            child: Text(''
-                                'No notes found for your search query.',
-                                style: TextStyle(color: Colors.grey[600], fontSize: 16),
+                            child: Text(
+                              ''
+                              'No notes found for your search query.',
+                              style: TextStyle(
+                                color: Colors.grey[600],
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                         ),
-                      
-                    ], 
+                    ],
                   ),
                 );
         },
