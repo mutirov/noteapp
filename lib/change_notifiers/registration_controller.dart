@@ -5,8 +5,6 @@ import 'package:notes_app/tools/constants.dart';
 import 'package:notes_app/tools/dialogs.dart';
 
 class RegistrationController extends ChangeNotifier {
-
-
   bool _isRegisterMode = true;
   bool get isRegisterMode => _isRegisterMode;
   set isRegisterMode(bool value) {
@@ -56,15 +54,17 @@ class RegistrationController extends ChangeNotifier {
     _isLoading = true;
     try {
       if (_isRegisterMode) {
-       await AuthService.register(
+        await AuthService.register(
           fullName: fullName,
           email: email,
           password: password,
         );
-        if(!context.mounted) return;
+        if (!context.mounted) return;
         showMessageDialog(
-        context: context,
-        message: 'A verification email has been sent to your email address. Please verify your email before logging in.');
+          context: context,
+          message:
+              'A verification email has been sent to your email address. Please verify your email before logging in.',
+        );
         //while email is not verified, just reload the user
         while (!AuthService.isEmailVerified) {
           await Future.delayed(
@@ -73,25 +73,33 @@ class RegistrationController extends ChangeNotifier {
           );
         }
       } else {
-        await AuthService.login(
-          email: email,
-          password: password,
-        );
+        await AuthService.login(email: email, password: password);
       }
     } on FirebaseAuthException catch (e) {
-      if(!context.mounted) return; 
+      if (!context.mounted) return;
       showMessageDialog(
         context: context,
         message: authExceptionMapper[e.code] ?? 'Unknown error',
       );
     } catch (e) {
-         if(!context.mounted) return; 
+      if (!context.mounted) return;
       showMessageDialog(context: context, message: 'Unknown error');
-    }
-    finally {
+    } finally {
       _isLoading = false;
     }
   }
+
+  Future<void> authenticateWithGoogle({required BuildContext context}) async {
+    try {
+      await AuthService.signInWithGoogle();
+    } on NoGoogleAccountChosenException {
+      return;
+    } catch (e) {
+      if (!context.mounted) return;
+      showMessageDialog(context: context, message: 'Unknown error');
+    }
+  }
+
   Future<void> resetPassword({
     required BuildContext context,
     required String email,
@@ -99,22 +107,26 @@ class RegistrationController extends ChangeNotifier {
     _isLoading = true;
     try {
       await AuthService.resetPassword(email: email);
-      if(!context.mounted) return; 
+      if (!context.mounted) return;
       showMessageDialog(
         context: context,
         message: 'A password reset link has been sent to your email address.',
       );
     } on FirebaseAuthException catch (e) {
-      if(!context.mounted) return; 
+      if (!context.mounted) return;
       showMessageDialog(
         context: context,
         message: authExceptionMapper[e.code] ?? 'Unknown error',
       );
     } catch (e) {
-         if(!context.mounted) return; 
+      if (!context.mounted) return;
       showMessageDialog(context: context, message: 'Unknown error');
     } finally {
       _isLoading = false;
     }
   }
+}
+
+class NoGoogleAccountChosenException implements Exception {
+  const NoGoogleAccountChosenException();
 }

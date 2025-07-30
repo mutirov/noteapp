@@ -98,7 +98,7 @@ class NoteCard extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-             Divider(),
+                SizedBox(width: 24,),
                 GestureDetector(
                   onTap: () async {
                     final shouldDelete =

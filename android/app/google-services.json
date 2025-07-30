@@ -12,7 +12,20 @@
           "package_name": "com.example.kitaphana"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "11262065114-g58jhond8f3cgu47lm121le0ugip5im8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kitaphana",
+            "certificate_hash": "852aeafe505a7919929818bb956cc40de0c8ae1b"
+          }
+        },
+        {
+          "client_id": "11262065114-25cqvuu15k14bliuta7basendbus0to9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCcxufG3GR10E97J6OLmopiDPMgCpHHwCo"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "11262065114-25cqvuu15k14bliuta7basendbus0to9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "11262065114-3vpnh82p73aobr89t1hmjo375c15akf7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kitaphana"
+              }
+            }
+          ]
         }
       }
     },
@@ -31,7 +56,12 @@
           "package_name": "com.example.notes_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "11262065114-25cqvuu15k14bliuta7basendbus0to9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCcxufG3GR10E97J6OLmopiDPMgCpHHwCo"
@@ -39,7 +69,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "11262065114-25cqvuu15k14bliuta7basendbus0to9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "11262065114-3vpnh82p73aobr89t1hmjo375c15akf7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kitaphana"
+              }
+            }
+          ]
         }
       }
     }

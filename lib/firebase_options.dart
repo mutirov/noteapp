@@ -42,12 +42,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyBQdLDMtfho-asPfNcqd_YLjmU9OFRQxTU',
-    appId: '1:11262065114:web:39f04aa77fcae23bcc68e3',
+    appId: '1:11262065114:web:0219283ae0e9c1d6cc68e3',
     messagingSenderId: '11262065114',
     projectId: 'flutterkitaphana',
     authDomain: 'flutterkitaphana.firebaseapp.com',
     storageBucket: 'flutterkitaphana.firebasestorage.app',
-    measurementId: 'G-XGH5V1M76S',
+    measurementId: 'G-59G1NPJZCM',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -64,6 +64,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '11262065114',
     projectId: 'flutterkitaphana',
     storageBucket: 'flutterkitaphana.firebasestorage.app',
+    androidClientId: '11262065114-g58jhond8f3cgu47lm121le0ugip5im8.apps.googleusercontent.com',
+    iosClientId: '11262065114-tujv7uohtifc7d1fuhtrftc4npdi7o7r.apps.googleusercontent.com',
     iosBundleId: 'com.example.notesApp',
   );
 
@@ -73,6 +75,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '11262065114',
     projectId: 'flutterkitaphana',
     storageBucket: 'flutterkitaphana.firebasestorage.app',
+    androidClientId: '11262065114-g58jhond8f3cgu47lm121le0ugip5im8.apps.googleusercontent.com',
+    iosClientId: '11262065114-tujv7uohtifc7d1fuhtrftc4npdi7o7r.apps.googleusercontent.com',
     iosBundleId: 'com.example.notesApp',
   );
 
@@ -85,4 +89,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'flutterkitaphana.firebasestorage.app',
     measurementId: 'G-59G1NPJZCM',
   );
+
 }
